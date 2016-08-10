@@ -1,0 +1,67 @@
+@import 'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.1.2/css/bulma.min.css';
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css';
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html, body, #root {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+main {
+  overflow: auto;
+}
+
+body {
+  background-color: #fff;
+  -webkit-overflow-scrolling: touch;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: 100vh;
+  width: 100vw;
+}
+
+.form {
+  padding-top: 20px!important;
+  padding-bottom: 20px!important;
+}
+
+.form .columns {
+  flex-direction: row-reverse;
+}
+
+.Notification {
+  position:absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10000;
+  max-height: 50px;
+  transition: bottom 0.10s linear;
+}
+
+.Notification.hidden {
+  bottom: -70px
+}
+
+.Navbar {
+  min-height: 64px!important;
+}
+
+.Navbar .nav-toggle .nav-item {
+  margin-top: 10px;
+  font-size: 20px;
+}
