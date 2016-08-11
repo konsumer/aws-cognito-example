@@ -67,7 +67,7 @@ class FormUser extends Component {
         </div>
 
         <div className='control'>
-          <button className={'button is-primary' + (submitting ? ' is-loading' : '')} type='submit' disabled={disabled}>
+          <button className={'button is-primary is-large' + (submitting ? ' is-loading' : '')} type='submit' disabled={disabled}>
             {type || 'save'}
           </button>
         </div>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your App Here</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="root"></div>
+  <!-- automatic poyfilling -->
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+  <!-- pulling from CDN because these don't integrate into webpack/browserify well. -->
+  <script src="http://www-cs-students.stanford.edu/~tjw/jsbn/jsbn.js"></script>
+  <script src="http://www-cs-students.stanford.edu/~tjw/jsbn/jsbn2.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.0/sjcl.min.js"></script>
+  <!-- if I wasn't using rest of AWS SDK, I'd do this: -->
+  <!--  <script src="https://gitcdn.xyz/repo/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js"></script> -->
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.3.5.min.js"></script>
+  <script>AWSCognito=AWS</script>
+  <script src="https://gitcdn.xyz/repo/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js"></script>
+  <script src="/build/client.js"></script>
+</body>
+</html>

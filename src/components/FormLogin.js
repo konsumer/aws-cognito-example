@@ -37,7 +37,7 @@ class FormLogin extends Component {
           </div>
         </div>
         <div className='control'>
-          <button className={'button is-primary' + (submitting ? ' is-loading' : '')} type='submit' disabled={disabled}>
+          <button className={'button is-primary is-large' + (submitting ? ' is-loading' : '')} type='submit' disabled={disabled}>
             login
           </button>
         </div>

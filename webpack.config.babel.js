@@ -17,24 +17,18 @@ const config = {
   devtool: 'eval-source-map',
   entry: {
     client: [
-      './client/index.js',
+      './src/index.js',
       'webpack/hot/only-dev-server'
     ]
   },
   output: {
-    path: resolve(__dirname, './client/webroot/build'),
+    path: resolve(__dirname, './webroot/build'),
     publicPath: '/build/',
     filename: '[name].js'
   },
   module: {
     loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /(node_modules)/,
-        loader: 'babel'
-      },
-      // gross hack: https://github.com/aws/aws-sdk-js/issues/603
-      { test: /aws-sdk/, loaders: ['transform?brfs'] },
+      { test: /\.jsx?$/, exclude: /(node_modules)/, loader: 'babel' },
       { test: /\.json$/, loaders: ['json'] }
     ]
   },

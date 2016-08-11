@@ -29,6 +29,7 @@ const Routing = () => (
   </Provider>
 )
 
+// I dunno if I really need this...
 if (module.hot) {
   module.hot.accept()
 }
