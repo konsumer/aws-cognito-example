@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, browserHistory } from 'react-router'
+import { SubmissionError } from 'redux-form'
 
 import { register } from '../api/user'
 import { error, success } from '../api/notification'
@@ -9,11 +10,10 @@ export default class Register extends React.Component {
   constructor (props) {
     super(props)
     this.onSubmit = this.onSubmit.bind(this)
-    this.state = {errors: {}}
   }
 
   onSubmit (form) {
-    register({
+    return register({
       username: form.username,
       password: form.password,
       email: form.email
@@ -27,15 +27,11 @@ export default class Register extends React.Component {
       let field = false
       if (msg.search('Password') !== -1) {
         field = true
-        this.setState({errors: {
-          password: msg
-        }})
+        throw new SubmissionError({password: msg})
       }
       if (msg.search('User') !== -1) {
         field = true
-        this.setState({errors: {
-          username: msg
-        }})
+        throw new SubmissionError({username: msg})
       }
       if (!field) {
         error(msg)
@@ -54,7 +50,7 @@ export default class Register extends React.Component {
             </div>
           </div>
           <div className='column'>
-            <FormUser type='register' submiterrors={this.state.errors} onSubmit={this.onSubmit} />
+            <FormUser type='register' onSubmit={this.onSubmit} />
           </div>
         </div>
       </div>

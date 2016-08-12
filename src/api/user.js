@@ -1,7 +1,12 @@
 import store from '../store'
 import { error, success } from './notification'
 
-const { CognitoUser, CognitoUserPool, CognitoUserAttribute, AuthenticationDetails } = AWS.CognitoIdentityServiceProvider
+const {
+  CognitoUser,
+  CognitoUserPool,
+  CognitoUserAttribute,
+  AuthenticationDetails
+} = AWS.CognitoIdentityServiceProvider
 
 
 // TODO:
@@ -42,19 +47,28 @@ export function logout () {
   store.dispatch({type: 'user/user', user: cognitoUser})
 }
 
+// authenticate user, and also ask for MFA or verification code, if needed
 export function login (Username, Password) {
   return new Promise((resolve, reject) => {
-    cognitoUser = new CognitoUser({ Username, Password })
-    cognitoUser.authenticateUser(AuthenticationDetails({ Username, Password }), {
-      onSuccess: function (result) {
-        store.dispatch({type: 'user/user', user: cognitoUser})
-        resolve(cognitoUser)
-      },
-      onFailure: reject,
-      mfaRequired: function (codeDeliveryDetails) {
-        // TODO: check how I can keep it all in this flow
-        cognitoUser.sendMFACode(prompt('Please input verification code:'), this)
-      }
+    var userData = {
+        Username : 'username',
+        Pool : userPool
+    };
+    var cognitoUser = new AWSCognito.CognitoIdentityServiceProvider.CognitoUser(userData);
+    cognitoUser.authenticateUser({Username, Password}, {
+        onSuccess: function (result) {
+            console.log('access token + ' + result.getAccessToken().getJwtToken());
+            resolve(result);
+
+            // AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+            //     IdentityPoolId : '...' // your identity pool id here
+            //     Logins : {
+            //         // Change the key below according to the specific region your user pool is in.
+            //         'cognito-idp.us-east-1.amazonaws.com/us-east-1_TcoKGbf7n' : result.getIdToken().getJwtToken()
+            //     }
+            // });
+        },
+        onFailure: reject
     })
   })
 }
