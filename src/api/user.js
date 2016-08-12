@@ -9,20 +9,16 @@ import store from '../store'
 const {
   CognitoUser,
   CognitoUserPool,
-  CognitoUserAttribute,
-  AuthenticationDetails
-} = AWS.CognitoIdentityServiceProvider
-
+  CognitoUserAttribute
+} = window.AWS.CognitoIdentityServiceProvider
 
 // TODO:
 // need to rework methods from these examples:
 // http://goo.gl/Y8XatZ
 
-/* global prompt */
-
 export let cognitoUser = null
 
-AWS.config.region = process.env.AWS_REGION
+window.AWS.config.region = process.env.AWS_REGION
 
 const userPool = new CognitoUserPool({
   UserPoolId: process.env.AWS_IDENTITYPOOL,
@@ -57,30 +53,30 @@ export function logout () {
 export function login (Username, Password) {
   return new Promise((resolve, reject) => {
     var userData = {
-        Username : 'username',
-        Pool : userPool
-    };
-    var cognitoUser = new AWSCognito.CognitoIdentityServiceProvider.CognitoUser(userData);
+      Username: Username,
+      Pool: userPool
+    }
+    var cognitoUser = new CognitoUser(userData)
     cognitoUser.authenticateUser({Username, Password}, {
-        onSuccess: function (result) {
-            console.log('access token + ' + result.getAccessToken().getJwtToken());
-            resolve(result);
+      onSuccess: function (result) {
+        console.log('access token + ' + result.getAccessToken().getJwtToken())
+        resolve(result)
 
-            // AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-            //     IdentityPoolId : '...' // your identity pool id here
-            //     Logins : {
-            //         // Change the key below according to the specific region your user pool is in.
-            //         'cognito-idp.us-east-1.amazonaws.com/us-east-1_TcoKGbf7n' : result.getIdToken().getJwtToken()
-            //     }
-            // });
-        },
-        onFailure: reject
+        // AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        //     IdentityPoolId : '...' // your identity pool id here
+        //     Logins : {
+        //         // Change the key below according to the specific region your user pool is in.
+        //         'cognito-idp.us-east-1.amazonaws.com/us-east-1_TcoKGbf7n' : result.getIdToken().getJwtToken()
+        //     }
+        // })
+      },
+      onFailure: reject
     })
   })
 }
 
-// allow user to reset password 
-export function reset() {
+// allow user to reset password
+export function reset () {
   console.log('Not implemented.')
 }
 
