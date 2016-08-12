@@ -1,11 +1,10 @@
 /**
  * Wrapper around AWS Cognito auth
  * My goal is to keep the interface minimal:
- * login(), register(), logout()
+ * login(), register(), logout(), reset()
  * All other features (like validation or multi-factor) should be tied to those
  */
 import store from '../store'
-import { error, success } from './notification'
 
 const {
   CognitoUser,
@@ -47,6 +46,7 @@ export function register (userData) {
   })
 }
 
+// log user out
 export function logout () {
   cognitoUser.signOut()
   cognitoUser = null
@@ -77,6 +77,11 @@ export function login (Username, Password) {
         onFailure: reject
     })
   })
+}
+
+// allow user to reset password 
+export function reset() {
+  console.log('Not implemented.')
 }
 
 export function reducer (state = {user: false}, action) {
