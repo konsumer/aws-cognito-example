@@ -6,7 +6,7 @@ export function notification (message, type, stay) {
     if (!stay) {
       setTimeout(() => {
         store.dispatch({type: 'notification/hide'})
-      }, 2000)
+      }, 4000)
     }
   })
 }
