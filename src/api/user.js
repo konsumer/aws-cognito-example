@@ -1,3 +1,9 @@
+/**
+ * Wrapper around AWS Cognito auth
+ * My goal is to keep the interface minimal:
+ * login(), register(), logout()
+ * All other features (like validation or multi-factor) should be tied to those
+ */
 import store from '../store'
 import { error, success } from './notification'
 
