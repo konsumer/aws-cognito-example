@@ -52,12 +52,17 @@ export function logout () {
 // authenticate user, and also ask for MFA or verification code, if needed
 export function login (Username, Password) {
   return new Promise((resolve, reject) => {
+    var authenticationData = {
+        Username : Username,
+        Password : Password,
+    };
+    var authenticationDetails = new window.AWS.CognitoIdentityServiceProvider.AuthenticationDetails(authenticationData);
     var userData = {
-      Username: Username,
-      Pool: userPool
-    }
+        Username : Username,
+        Pool : userPool
+    };
     var cognitoUser = new CognitoUser(userData)
-    cognitoUser.authenticateUser({Username, Password}, {
+    cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: function (result) {
         console.log('access token + ' + result.getAccessToken().getJwtToken())
         resolve(result)
