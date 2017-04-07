@@ -50,7 +50,9 @@ export function logout () {
 }
 
 // authenticate user, and also ask for MFA or verification code, if needed
-export function login (Username, Password) {
+export function login (form) {
+    var Username = form.username;
+    var Password = form.password;
   return new Promise((resolve, reject) => {
     var authenticationData = {
         Username : Username,
