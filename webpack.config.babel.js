@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 import { resolve } from 'path'
 const { DedupePlugin, UglifyJsPlugin, OccurrenceOrderPlugin } = optimize
 
+process.env.NODE_ENV == process.env.NODE_ENV || 'development'
+
 dotenv.config()
 const exposed = [
   'NODE_ENV',
@@ -17,8 +19,7 @@ const config = {
   devtool: 'eval-source-map',
   entry: {
     client: [
-      './src/index.js',
-      'webpack/hot/only-dev-server'
+      './src/index.js'
     ]
   },
   output: {
@@ -43,7 +44,8 @@ const config = {
 
 if (process.env.NODE_ENV === 'production') {
   config.plugins.push(new UglifyJsPlugin())
+} else if (process.env.NODE_ENV === 'development') {
+  config.entry.client.push('webpack/hot/only-dev-server')
 }
 
 export default config
-

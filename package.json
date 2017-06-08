@@ -4,7 +4,8 @@
   "description": "Basic usage of amazon-cognito-identity with modern javascript tooling",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --colors --quiet --history-api-fallback --hot --inline --no-info --content-base=./webroot"
+    "start": "webpack-dev-server --progress --colors --quiet --history-api-fallback --hot --inline --no-info --content-base=./webroot",
+    "build": "NODE_ENV=production webpack --progress --colors"
   },
   "repository": {
     "type": "git",
